@@ -18,6 +18,9 @@ public class Category {
 	
 	private String name;
 	
+	private String description;
+	
+	
 	@OneToMany(mappedBy="category", cascade=CascadeType.REMOVE)
 	private List<Product> products;
 
@@ -44,6 +47,15 @@ public class Category {
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	
 	
 	

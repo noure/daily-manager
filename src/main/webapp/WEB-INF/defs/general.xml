@@ -23,4 +23,12 @@
 		<put-attribute name="current" value="login" />
 
 	</definition>
+	
+	<definition name="prod" extends="common">
+		<put-attribute name="title" value="Daily Manager" />
+		<put-attribute name="body" value="/WEB-INF/jsp/prod.jsp" />
+		<put-attribute name="current" value="prod" />
+
+	</definition>
+	
 </tiles-definitions>

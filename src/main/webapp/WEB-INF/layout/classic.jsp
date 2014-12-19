@@ -53,6 +53,9 @@
 						<li class="${current == 'users' ? 'active' : '' }"><a
 							href='<spring:url value="/users.html"/>'>Users</a></li>
 					</security:authorize> --%>
+					<security:authorize access="isAuthenticated()">
+						<li><a href='<spring:url value="/prod.html"/>'>Products </a></li>
+					</security:authorize>
 
 				</ul>
 
