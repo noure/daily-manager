@@ -1,14 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Daily Manager</title>
-</head>
-<body>
- here will be the home of my application 
- 
+	pageEncoding="UTF-8"%>
 
-</body>
-</html>
+
+<%@ include file="../layout/taglib.jsp"%>
+
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		//alert("test");
+		$('#productTab').DataTable({
+			"sPaginationType": "full_numbers",
+		});
+	});
+</script>
+
+
+<table id="productTab" class="table table-bordered table-hover table-striped" >
+	<thead>
+		<tr>
+
+			<th>id</th>
+			<th>name</th>
+			<th>price</th>
+			<th>quantity</th>
+		</tr>
+	</thead>
+	<tbody>
+
+		<c:forEach items="${products}" var="prod">
+
+			<tr>
+
+				<th><c:out value="${prod.id}" /></th>
+				<th><c:out value="${prod.name}" /></th>
+				<th><c:out value="${prod.price}" /></th>
+				<th><c:out value="${prod.quantity}" /></th>
+			</tr>
+
+		</c:forEach>
+
+	</tbody>
+</table>
+

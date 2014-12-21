@@ -24,10 +24,17 @@
 
 	</definition>
 	
+	<definition name="cat" extends="common">
+		<put-attribute name="title" value="Daily Manager" />
+		<put-attribute name="body" value="/WEB-INF/jsp/cat.jsp" />
+		<put-attribute name="current" value="Category" />
+
+	</definition>
+	
 	<definition name="prod" extends="common">
 		<put-attribute name="title" value="Daily Manager" />
 		<put-attribute name="body" value="/WEB-INF/jsp/prod.jsp" />
-		<put-attribute name="current" value="prod" />
+		<put-attribute name="current" value="Product" />
 
 	</definition>
 	

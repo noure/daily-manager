@@ -9,10 +9,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="./avbar-static-top.css" rel="stylesheet">
-<link href="./bootstrap.min.css" rel="stylesheet">
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<!--  data tables  -->
+<!-- DataTables CSS -->
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.10.4/css/jquery.dataTables.css">
+
+<!-- jQuery -->
+
+<script type="text/javascript" charset="utf8"
+	src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+
+<!-- DataTables -->
+<script type="text/javascript" charset="utf8"
+	src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+
+<!--  end of all -->
+
+
+
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
 <script type="text/javascript"
 	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
 
@@ -29,6 +46,7 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title><tiles:getAsString name="title" /></title>
+
 </head>
 <body>
 	<tilesx:useAttribute name="current" />
@@ -54,7 +72,13 @@
 							href='<spring:url value="/users.html"/>'>Users</a></li>
 					</security:authorize> --%>
 					<security:authorize access="isAuthenticated()">
-						<li><a href='<spring:url value="/prod.html"/>'>Products </a></li>
+						<li class="${current == 'Category' ? 'active' : '' }"><a
+							href='<spring:url value="/cat.html"/>'>Category </a></li>
+					</security:authorize>
+
+					<security:authorize access="isAuthenticated()">
+						<li class="${current == 'Product' ? 'active' : '' }"><a
+							href='<spring:url value="/prod.html"/>'>Product </a></li>
 					</security:authorize>
 
 				</ul>

@@ -39,6 +39,15 @@
 		id="transactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+
+	<bean id="conversionService"
+		class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		<property name="formatters">
+			<set>
+				<ref bean="categoryFormatter" />
+			</set>
+		</property>
+	</bean>
 	<jpa:repositories base-package="ma.ensa.nour.repository" />
 	<import resource="security.xml" />
 </beans>

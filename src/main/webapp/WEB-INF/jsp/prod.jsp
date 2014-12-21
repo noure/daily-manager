@@ -1,49 +1,111 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<script type="text/javascript">
-	$('#exampleModal').on('show.bs.modal', function(event) {
-		var button = $(event.relatedTarget) // Button that triggered the modal
-		var recipient = button.data('whatever') // Extract info from data-* attributes
-		// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-		// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-		var modal = $(this)
-		modal.find('.modal-title').text('New message to ' + recipient)
-		modal.find('.modal-body input').val(recipient)
-	})
-</script>
+
+<%@ include file="../layout/taglib.jsp"%>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal"
+	data-target="#prodModal">Add product</button>
 
 
 
-<button type="button" class="btn btn-primary" data-toggle="modal"
-	data-target="#exampleModal" data-whatever="@mdo"> Add category</button>
-
-
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-	aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">
-					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-				</button>
-				<h4 class="modal-title" id="exampleModalLabel">Adding category</h4>
-			</div>
-			<div class="modal-body">
-				<form role="form">
+<form:form commandName="product" cssClass="form-horizontal">
+	<!-- Modal -->
+	<div class="modal fade" id="prodModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Product</h4>
+				</div>
+				<div class="modal-body">
 					<div class="form-group">
-						<label for="recipient-name" class="control-label">Name of category:</label>
-						<input type="text" class="form-control" id="recipient-name">
+						<label for="name" class="col-sm-2 control-label">Name: </label>
+						<div class="col-sm-10">
+							<form:input cssClass="form-control" path="name"
+								placeholder="Name" />
+							<form:errors path="name" />
+						</div>
 					</div>
+
 					<div class="form-group">
-						<label for="message-text" class="control-label">Description:</label>
-						<textarea class="form-control" id="message-text"></textarea>
+						<label for="price" class="col-sm-2 control-label">Price: </label>
+						<div class="col-sm-10">
+							<form:input cssClass="form-control" path="price"
+								placeholder="Price" />
+							<form:errors path="price" />
+						</div>
 					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary">Send message</button>
+
+					<div class="form-group">
+						<label for="category" class="col-sm-2 control-label">Category:
+						</label>
+						<div class="col-sm-10">
+							<form:select cssClass="form-control" path="category.id"
+								placeholder="Category">
+
+
+								<form:options items="${categories}" itemLabel="name"
+									itemValue="id" />
+							</form:select>
+
+							<form:errors path="category" />
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary">Save</button>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+</form:form>
+<br />
+
+
+<table class="table table-bordered table-hover table-striped">
+	<thead>
+		<tr>
+			<th>poduct id</th>
+			<th>poduct name</th>
+			<th>poduct price</th>
+			<th>poduct belong to</th>
+			<th>poduct quantity</th>
+	</thead>
+
+	<tbody>
+		<c:forEach items="${products}" var="prod">
+
+
+			<tr>
+				<td><c:out value="${prod.id}" /></td>
+				<td><c:out value="${prod.name}" /></td>
+				<td><c:out value="${prod.price }" /></td>
+				<td><c:out value="${prod.category.name}" /></td>
+				<td><div class="form-group">
+						<label for="quantity" class="col-sm-2 control-label">Quantity: </label>
+						<div class="col-sm-10">
+							<%-- <form:input cssClass="form-control" path="quantity"
+								placeholder="Quantity" />
+							<form:errors path="quantity" /> --%>
+						</div>
+					</div></td>
+
+			</tr>
+
+
+
+
+		</c:forEach>
+	</tbody>
+
+</table>
+
+
+
+
