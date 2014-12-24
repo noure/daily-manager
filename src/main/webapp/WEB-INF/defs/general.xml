@@ -38,4 +38,11 @@
 
 	</definition>
 	
+	<definition name="task" extends="common">
+		<put-attribute name="title" value="Task Manager" />
+		<put-attribute name="body" value="/WEB-INF/jsp/task.jsp" />
+		<put-attribute name="current" value="Task" />
+
+	</definition>
+	
 </tiles-definitions>

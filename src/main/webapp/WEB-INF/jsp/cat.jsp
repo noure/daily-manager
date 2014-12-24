@@ -10,7 +10,7 @@
 
 
 
-<form:form commandName="category" cssClass="form-horizontal">
+<form:form commandName="category" cssClass="form-horizontal" id="catForm">
 	<!-- Modal -->
 	<div class="modal fade" id="CatModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
@@ -49,6 +49,37 @@
 		</div>
 	</div>
 </form:form>
+
+
+<script type="text/javascript">
+<!--
+	//-->
+	$('#catForm').validate(
+			{
+				rules : {
+					name : {
+						required : true,
+						minlength : 3
+					},
+					description : {
+						required : true,
+						minlength : 5
+					}
+
+				},
+				highlight : function(element) {
+
+					$(element).closest('.form-group')
+							.removeClass('has-success').addClass('has-error');
+				},
+				unhighlight : function(element) {
+
+					$(element).closest('.form-group').removeClass('has-error')
+							.addClass('has-success');
+				}
+
+			});
+</script>
 <br />
 <br />
 

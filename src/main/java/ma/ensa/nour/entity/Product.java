@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Size;
+
+import ma.ensa.nour.validation.PositivePrice;
 
 @Entity(name = "app_product")
 public class Product {
@@ -14,9 +17,12 @@ public class Product {
 	@Id
 	private int id;
 	
+	@Size(min=3,message="the product name length must be at least 3 chars")
 	private String name;
 	
+	@PositivePrice(message="the product's price must be positive ")
 	private double price;
+	
 	
 	private int quantity;
 	

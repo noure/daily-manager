@@ -9,6 +9,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!--  Some CSS for the task page  -->
+<link href='../css/style.css' rel="stylesheet" type="text/css" />
+<link href='../css/css/font-awesome.css' rel="stylesheet"
+	type="text/css" />
+<link href='http://fonts.googleapis.com/css?family=Open+Sans'
+	rel='stylesheet' type='text/css' />
 
 <!--  data tables  -->
 <!-- DataTables CSS -->
@@ -79,6 +85,11 @@
 					<security:authorize access="isAuthenticated()">
 						<li class="${current == 'Product' ? 'active' : '' }"><a
 							href='<spring:url value="/prod.html"/>'>Product </a></li>
+					</security:authorize>
+
+					<security:authorize access="isAuthenticated()">
+						<li class="${current == 'Task' ? 'active' : '' }"><a
+							href='<spring:url value="/task.html"/>'>Task </a></li>
 					</security:authorize>
 
 				</ul>

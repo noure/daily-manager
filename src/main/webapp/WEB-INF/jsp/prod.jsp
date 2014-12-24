@@ -10,7 +10,7 @@
 
 
 
-<form:form commandName="product" cssClass="form-horizontal">
+<form:form commandName="product" cssClass="form-horizontal" id="prodForm">
 	<!-- Modal -->
 	<div class="modal fade" id="prodModal" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
@@ -37,7 +37,6 @@
 						<div class="col-sm-10">
 							<form:input cssClass="form-control" path="price"
 								placeholder="Price" />
-							<form:errors path="price" />
 						</div>
 					</div>
 
@@ -53,7 +52,6 @@
 									itemValue="id" />
 							</form:select>
 
-							<form:errors path="category" />
 						</div>
 					</div>
 
@@ -75,37 +73,45 @@
 			<th>poduct name</th>
 			<th>poduct price</th>
 			<th>poduct belong to</th>
-			<th>poduct quantity</th>
 	</thead>
 
 	<tbody>
 		<c:forEach items="${products}" var="prod">
-
-
 			<tr>
 				<td><c:out value="${prod.id}" /></td>
 				<td><c:out value="${prod.name}" /></td>
 				<td><c:out value="${prod.price }" /></td>
 				<td><c:out value="${prod.category.name}" /></td>
-				<td><div class="form-group">
-						<label for="quantity" class="col-sm-2 control-label">Quantity: </label>
-						<div class="col-sm-10">
-							<%-- <form:input cssClass="form-control" path="quantity"
-								placeholder="Quantity" />
-							<form:errors path="quantity" /> --%>
-						</div>
-					</div></td>
-
 			</tr>
-
-
-
-
 		</c:forEach>
 	</tbody>
 
 </table>
 
+<script type="text/javascript">
+<!--
+	//-->
+	$('#prodForm').validate(
+			{
+				rules : {
+					name : {
+						required : true,
+						minlength : 3
+					}
+				},
+				highlight : function(element) {
+
+					$(element).closest('.form-group')
+							.removeClass('has-success').addClass('has-error');
+				},
+				unhighlight : function(element) {
+
+					$(element).closest('.form-group').removeClass('has-error')
+							.addClass('has-success');
+				}
+
+			});
+</script>
 
 
 

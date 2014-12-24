@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -40,8 +39,11 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/prod", method = RequestMethod.POST)
-	String addCategory(@ModelAttribute("product") @Valid Product product,BindingResult result, Model m) {
-		
+	String addCategory(@Valid @ModelAttribute("product")  Product product,BindingResult result, Model m) {
+		 
+		if(result.hasErrors()){
+			return "prod";
+		}
 		int catId=product.getCategory().getId();
 		Category categoryOfProduct =categoryService.findById(catId);
 		product.setCategory(categoryOfProduct);
