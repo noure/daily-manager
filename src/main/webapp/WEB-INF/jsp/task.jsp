@@ -71,11 +71,12 @@
 
 
 	<div class="form-group">
-		<input type="submit" class="btn btn-primary" name="action" value="Add" />
+		<input id="addButton" type="submit" class="btn btn-primary"
+			name="action" value="Add" /> <input type="submit"
+			class="btn btn-primary" name="action" value="Edit" /> <input
+			type="submit" class="btn btn-primary" name="action" value="Delete" />
 		<input type="submit" class="btn btn-primary" name="action"
-			value="Edit" /> <input type="submit" class="btn btn-primary"
-			name="action" value="Delete" /> <input type="submit"
-			class="btn btn-primary" name="action" value="Search" />
+			value="Search" />
 	</div>
 
 </form:form>
@@ -113,38 +114,71 @@
 
 
 <script type="text/javascript">
-	$(document).ready(
-			function() {
-				//alert("test");
-				$('#tabTask').DataTable({
-					"sPaginationType" : "full_numbers",
-				});
-
-				$('#taskForm').validate(
-						{
-							rules : {
-								taskName : {
-									required : true,
-									minlength : 3
-								},
-								taskDescription : {
-									required : true,
-									minlength : 5
-								}
-
-							},
-							highlight : function(element) {
-
-								$(element).closest('.form-group').removeClass(
-										'has-success').addClass('has-error');
-							},
-							unhighlight : function(element) {
-
-								$(element).closest('.form-group').removeClass(
-										'has-error').addClass('has-success');
-							}
-
+	$(document)
+			.ready(
+					function() {
+						//alert("test");
+						$('#tabTask').DataTable({
+							"sPaginationType" : "full_numbers",
 						});
-			});
+
+						$('#addButton')
+								.click(
+										function() {
+
+											$('#taskForm')
+													.validate(
+															{
+																rules : {
+																	taskName : {
+																		required : true,
+																		minlength : 3,
+																		remote : {
+																			url : "<spring:url  value='/task/available.html' />",
+																			type : "get",
+																			data : {
+																				taskName : function() {
+																					return $(
+																							'#taskName')
+																							.val();
+																				},
+																				action : "add"
+
+																			}
+																		}
+																	},
+																	taskDescription : {
+																		required : true,
+																		minlength : 5
+																	}
+
+																},
+																highlight : function(
+																		element) {
+
+																	$(element)
+																			.closest(
+																					'.form-group')
+																			.removeClass(
+																					'has-success')
+																			.addClass(
+																					'has-error');
+																},
+																unhighlight : function(
+																		element) {
+
+																	$(element)
+																			.closest(
+																					'.form-group')
+																			.removeClass(
+																					'has-error')
+																			.addClass(
+																					'has-success');
+																}
+
+															});
+										});
+
+					});
 </script>
 

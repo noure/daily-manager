@@ -1,6 +1,5 @@
 package ma.ensa.nour.controller;
 
-
 import javax.validation.Valid;
 
 import ma.ensa.nour.entity.Task;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class TaskController {
@@ -43,9 +43,9 @@ public class TaskController {
 	}
 
 	@RequestMapping(value = "/task.do", method = RequestMethod.POST)
-	String actionTask(@Valid @ModelAttribute("task") Task task,BindingResult result,
-			@RequestParam String action, Model model) {
-		if(result.hasErrors()){
+	String actionTask(@Valid @ModelAttribute("task") Task task,
+			BindingResult result, @RequestParam String action, Model model) {
+		if (result.hasErrors()) {
 			return "task";
 		}
 		Task resultTask;
@@ -58,7 +58,7 @@ public class TaskController {
 			return "redirect:/task.html?add=succes";
 		case "edit":
 			taskService.update(task);
-			System.out.println("id task editing = "+ task.getId());
+			System.out.println("id task editing = " + task.getId());
 			resultTask = task;
 			init(model);
 			model.addAttribute("task", resultTask);
@@ -77,6 +77,15 @@ public class TaskController {
 			return "task";
 		}
 		return null;
+	}
+
+	@RequestMapping("/task/available")
+	@ResponseBody
+	public String isAvailable(@RequestParam String taskName) {
+
+		Boolean available = taskService.findByTaskName(taskName) == null;
+		return available.toString();
+
 	}
 
 }
