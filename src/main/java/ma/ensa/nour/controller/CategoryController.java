@@ -29,6 +29,7 @@ public class CategoryController {
 		return new Category();
 
 	}
+	
 
 	@RequestMapping(value = "/cat")
 	String showProd(Model m) {
